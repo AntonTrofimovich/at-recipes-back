@@ -1,0 +1,25 @@
+{
+  "name": "at-recipes",
+  "version": "1.0.0",
+  "description": "Basic app for storing recipes.",
+  "main": "index.js",
+  "scripts": {
+    "start": "./node_modules/.bin/nodemon index.js && npm start --prefix front/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AntonTrofimovich/at-recipes.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AntonTrofimovich/at-recipes/issues"
+  },
+  "homepage": "https://github.com/AntonTrofimovich/at-recipes#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
