@@ -1,6 +1,6 @@
 const { recipes: sql } = require("../sql");
 
-const cs = {}; // Reusable ColumnSet objects.
+// const cs = {}; // Reusable ColumnSet objects.
 
 class RecipesRepository {
     constructor(db, pgp) {
@@ -8,7 +8,7 @@ class RecipesRepository {
         this.pgp = pgp;
 
         // set-up all ColumnSet objects, if needed:
-        createColumnSets(pgp);
+        // createColumnSets(pgp);
     }
 
     // Creates the table;
@@ -29,6 +29,7 @@ class RecipesRepository {
     // Adds a new record and returns the full object;
     // It is also an example of mapping HTTP requests into query parameters;
     async add(values) {
+        console.log(values);
         return this.db.one(sql.add, {
             title: values.title,
             description: values.description,
@@ -69,21 +70,21 @@ class RecipesRepository {
 //////////////////////////////////////////////////////////
 // Example of statically initializing ColumnSet objects:
 
-function createColumnSets(pgp) {
-    // create all ColumnSet objects only once:
-    if (!cs.insert) {
-        // Type TableName is useful when schema isn't default "public" ,
-        // otherwise you can just pass in a string for the table name.
-        const table = new pgp.helpers.TableName({
-            table: "recipes",
-            schema: "public",
-        });
+// function createColumnSets(pgp) {
+//     // create all ColumnSet objects only once:
+//     if (!cs.insert) {
+//         // Type TableName is useful when schema isn't default "public" ,
+//         // otherwise you can just pass in a string for the table name.
+//         const table = new pgp.helpers.TableName({
+//             table: "recipes",
+//             schema: "public",
+//         });
 
-        cs.insert = new pgp.helpers.ColumnSet(["name"], { table });
-        cs.update = cs.insert.extend(["?id", "?user_id"]);
-    }
+//         cs.insert = new pgp.helpers.ColumnSet(["name"], { table });
+//         cs.update = cs.insert.extend(["?id", "?user_id"]);
+//     }
 
-    return cs;
-}
+//     return cs;
+// }
 
 module.exports = RecipesRepository;
