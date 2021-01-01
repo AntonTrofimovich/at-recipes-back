@@ -7,6 +7,8 @@ app.use(cors({
     optionsSuccessStatus: 200 // For legacy browser support
 }));
 
+require('./db')();
+
 app.get("/anton", (req, res) => res.send("Anton"))
 
 app.listen(3000, () =>
