@@ -1,3 +1,3 @@
-INSERT INTO recipes(title, description)
-VALUES(${title}, ${description})
+INSERT INTO recipes (title, description)
+VALUES (${title}, ${description})
 RETURNING *

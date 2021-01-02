@@ -13,6 +13,7 @@ app.use(
     })
 );
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
 
 const requestHandler = async (req, res, handler) => {
     try {
@@ -37,10 +38,33 @@ const POST = (url, handler) => {
     app.post(url, (req, res) => requestHandler(req, res, handler));
 };
 
+const DELETE = (url, handler) => {
+    app.delete(url, (req, res) => requestHandler(req, res, handler));
+};
+
 GET("/recipes/all", () => db.recipes.all());
 
-POST("/recipes/add", (req) => {
-    return db.task("add-recipe", (t) => t.recipes.add(req.body));
+POST("/recipes/save", (req) => {
+    return db.task("add-recipe", async (t) => {
+        const { id } = req.body;
+
+        if (!id) {
+            return t.recipes.add(req.body);
+        }
+
+        return t.recipes.update(req.body);
+
+        // const recipe = await t.recipes.find(req.body.id);
+        // console.log(recipe);
+    });
+});
+DELETE("/recipes/delete/:id", (req) => {
+    return db.task("add-recipe", async (t) => {
+        const { id } = req.params;
+        await t.recipes.remove(id);
+
+        return id;
+    });
 });
 
 app.listen(3000, () => console.log("listening on 3000"));

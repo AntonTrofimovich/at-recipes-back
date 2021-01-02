@@ -1,2 +1,2 @@
 SELECT * FROM recipes
-WHERE id = ${recipeId}
+WHERE id = ${id}

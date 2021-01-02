@@ -4,7 +4,7 @@
   "description": "Basic app for storing recipes.",
   "main": "index.js",
   "scripts": {
-    "start": "./node_modules/.bin/nodemon index.js"
+    "start": "./node_modules/.bin/nodemon --legacy-watch index.js"
   },
   "repository": {
     "type": "git",
