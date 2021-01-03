@@ -11,4 +11,6 @@ const pgp = pgPromise(initOptions);
 
 const db = pgp("postgres://root:secret@db:5432/recipes");
 
+db.recipes.create();
+
 module.exports = { db, pgp };

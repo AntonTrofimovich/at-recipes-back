@@ -1,4 +1,4 @@
-CREATE TABLE recipes
+CREATE TABLE IF NOT EXISTS recipes
 (
     id serial PRIMARY KEY,
     title text NOT NULL,
