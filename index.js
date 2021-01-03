@@ -6,15 +6,6 @@ const { db } = require("./db");
 
 const app = express();
 
-app.use(
-    cors({
-        origin: "http://localhost:4200",
-        optionsSuccessStatus: 200, // For legacy browser support
-    })
-);
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
-
 const requestHandler = async (req, res, handler) => {
     try {
         const data = await handler(req);
@@ -42,6 +33,15 @@ const DELETE = (url, handler) => {
     app.delete(url, (req, res) => requestHandler(req, res, handler));
 };
 
+app.use(
+    cors({
+        origin: "http://localhost:4200",
+        optionsSuccessStatus: 200, // For legacy browser support
+    })
+);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
+
 GET("/recipes/all", () => db.recipes.all());
 
 POST("/recipes/save", (req) => {
@@ -53,13 +53,10 @@ POST("/recipes/save", (req) => {
         }
 
         return t.recipes.update(req.body);
-
-        // const recipe = await t.recipes.find(req.body.id);
-        // console.log(recipe);
     });
 });
 DELETE("/recipes/delete/:id", (req) => {
-    return db.task("add-recipe", async (t) => {
+    return db.task("delete-recipe", async (t) => {
         const { id } = req.params;
         await t.recipes.remove(id);
 
