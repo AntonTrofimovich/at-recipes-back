@@ -11,6 +11,14 @@ const pgp = pgPromise(initOptions);
 
 const db = pgp("postgres://root:secret@db:5432/recipes");
 
-db.recipes.create().catch(e => console.log(e))
+const initDB = async () => {
+    try {
+        await db.recipes.create();
+    } catch (er) {
+        console.log(er);
+    }
 
-module.exports = { db, pgp };
+    return { db, pgp };
+};
+
+module.exports = { initDB };
