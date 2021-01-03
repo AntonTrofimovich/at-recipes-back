@@ -24,5 +24,6 @@ module.exports = {
         add: sql("recipes/add.sql"),
         update: sql("recipes/update.sql"),
         delete: sql("recipes/delete.sql"),
+        getAll: sql("recipes/get_all.sql"),
     },
 };

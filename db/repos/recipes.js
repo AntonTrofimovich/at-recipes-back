@@ -36,7 +36,7 @@ class RecipesRepository {
     }
 
     async all() {
-        return this.db.any("SELECT * FROM recipes");
+        return this.db.any(sql.getAll);
     }
 }
 
